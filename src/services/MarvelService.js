@@ -3,6 +3,7 @@
 class MarvelService {
 
     _apiBase = 'http://localhost:3001/comicvine/';
+    _baseOffset = 12;
 
     getResource = async (url) => {
         let res = await fetch(url);
@@ -25,7 +26,7 @@ class MarvelService {
         return res;
     }
 
-    getAllCharacters = async (offset) => {
+    getAllCharacters = async (offset = this._baseOffset) => {
         const res = await this.getResource(`${this._apiBase}characters?limit=9&offset=${offset}`);
         return res.results.map(this._transformCharacter);
     }
@@ -46,7 +47,7 @@ class MarvelService {
             id: char.id,
             description: char.deck || 'Description is missing',
             thumbnail: char.image.original_url,
-            comics: char.issue_credits ? char.issue_credits.slice(0, 16) : 'No comics',
+            comics: char.issue_credits ? char.issue_credits.slice(2, 14) : 'No comics',
             desc: char.description,
             homepage: char.site_detail_url,
             wiki: char.api_detail_url
