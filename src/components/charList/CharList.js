@@ -4,6 +4,7 @@ import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 
 import './charList.scss';
+import PropTypes from 'prop-types';
 
 class CharList extends Component {
 
@@ -16,11 +17,15 @@ class CharList extends Component {
         charEnd: false
     }
 
+    itemRefs = [];
+
     marvelService = new MarvelService();
 
     componentDidMount() {
         this.onRequest();
     }
+
+
 
     onRequest = (offset) => {
         this.onCharListLoading();
@@ -56,13 +61,32 @@ class CharList extends Component {
         });
     }
 
+    focusOnItem = (i) => {
+        this.itemRefs.map(item => item.classList.remove('char__item_selected'));
+        this.itemRefs[i].classList.add('char__item_selected');
+        this.itemRefs[i].focus();
+    }
+
     renderItems(arr) {
-        const items = arr.map(item => {
+        const items = arr.map((item, i) => {
             return (
                 <li
                     key={item.id}
                     className="char__item"
-                    onClick={() => this.props.onCharSelected(item.id)} >
+                    onClick={() => {
+                        this.props.onCharSelected(item.id);
+                        this.focusOnItem(i);
+                    }}
+                    ref={elem => this.itemRefs[i] = elem}
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                        if (e.key === ' ' || e.key === 'Enter') {
+                            this.props.onCharSelected(item.id);
+                            this.focusOnItem(i);
+                            e.preventDefault();
+                        }
+
+                    }} >
                     <img src={item.thumbnail} alt={item.name} />
                     <div className='char__name' >{item.name}</div>
                 </li>
@@ -101,6 +125,10 @@ class CharList extends Component {
             </div>
         )
     }
+}
+
+CharList.propTypes = {
+    onCharSelected: PropTypes.func.isRequired,
 }
 
 export default CharList;
