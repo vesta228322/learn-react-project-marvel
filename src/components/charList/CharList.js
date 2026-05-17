@@ -62,7 +62,7 @@ class CharList extends Component {
     }
 
     focusOnItem = (i) => {
-        this.itemRefs.map(item => item.classList.remove('char__item_selected'));
+        this.itemRefs.forEach(item => item.classList.remove('char__item_selected'));
         this.itemRefs[i].classList.add('char__item_selected');
         this.itemRefs[i].focus();
     }
