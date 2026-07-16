@@ -1,47 +1,43 @@
+import { useHttp } from "../hooks/http.hook";
 
+const useMarvelService = () => {
 
-class MarvelService {
+    const {req, loading, error, clearError} = useHttp();
 
-    _apiBase = 'http://localhost:3001/comicvine/';
-    _baseOffset = 12;
-
-    getResource = async (url) => {
-        let res = await fetch(url);
-
-        if (!res.ok) {
-            throw new Error(`Не удалось извлечь ${url}, статус: ${res.status}`);
-        }
-
-        return await res.json();
-    }
-
-
-    getAllInfo = async () => {
-        const res = await this.getResource(`${this._apiBase}characters?limit=10`);
+    const _apiBase = 'http://localhost:3001/comicvine/';
+    const _baseOffset = 12;
+    
+    const getAllInfo = async () => {
+        const res = await req(`${_apiBase}characters?limit=10`);
         return res;
     }
 
-    getSoloInfo = async () => {
-        const res = await this.getResource(`${this._apiBase}character/4005-1529`);
+    const getSoloInfo = async () => {
+        const res = await req(`${_apiBase}character/4005-1529`);
         return res;
     }
 
-    getAllCharacters = async (offset = this._baseOffset) => {
-        const res = await this.getResource(`${this._apiBase}characters?limit=9&offset=${offset}`);
-        return res.results.map(this._transformCharacter);
+    const getAllCharacters = async (offset = _baseOffset) => {
+        const res = await req(`${_apiBase}characters?limit=9&offset=${offset}`);
+        return res.results.map(_transformCharacter);
     }
 
-    getCharacter = async (id) => {
-        const res = await this.getResource(`${this._apiBase}character/4005-${id}?`);
-        return this._transformCharacter(res.results);
+    const getCharacter = async (id) => {
+        const res = await req(`${_apiBase}character/4005-${id}?`);
+        return _transformCharacter(res.results);
     }
 
-    getRandomCharacter = async (offset) => {
-        const res = await this.getResource(`${this._apiBase}characters?limit=1&offset=${offset}`);
-        return this._transformCharacter(res.results[0]);
+    const getRandomCharacter = async (offset) => {
+        const res = await req(`${_apiBase}characters?limit=1&offset=${offset}`);
+        return _transformCharacter(res.results[0]);
     }
 
-    _transformCharacter = (char) => {
+    const getComics = async () => {
+        const res = await req(`${_apiBase}issues?limit=8`);
+        console.log(res);
+    }
+
+    const _transformCharacter = (char) => {
         return {
             name: char.name,
             id: char.id,
@@ -53,6 +49,18 @@ class MarvelService {
             wiki: char.api_detail_url
         }
     }
+
+    return {
+        loading, 
+        error, 
+        clearError, 
+        getAllCharacters, 
+        getCharacter, 
+        getAllInfo, 
+        getSoloInfo, 
+        getRandomCharacter,
+        getComics
+    }
 }
 
-export default MarvelService;
+export default useMarvelService;
