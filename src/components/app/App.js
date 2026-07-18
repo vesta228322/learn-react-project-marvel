@@ -12,11 +12,11 @@ import ComicsList from "../../ComicsList/ComicsList";
 
 const App = () => {
 
-    const {getComics} = useMarvelService();
+    // const {getComics, getSoloInfo, getAllInfo} = useMarvelService();
 
-    useEffect(() => {
-        getComics().then(data => console.log(data));
-    }, []);
+    // useEffect(() => {
+    //     getComics().then(data => console.log(data));
+    // }, []);
     
     // useEffect(() => {
     //     getSoloInfo().then(res => console.log(res));

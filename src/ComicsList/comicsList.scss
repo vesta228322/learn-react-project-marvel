@@ -1,0 +1,40 @@
+.comics {
+
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(4, 225px);
+        gap: 67px;
+        }
+
+    &__poster {
+        width: 225px;
+        height: 346px;
+        margin-bottom: 10px;
+        filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.25));
+
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__name {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 16px;
+        color: #000000;
+        margin-bottom: 5px;
+    }
+
+    &__date {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 16px;
+        color: rgba(0, 0, 0, 0.6);
+
+
+    }
+}
