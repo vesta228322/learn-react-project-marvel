@@ -35,7 +35,7 @@ function ComicsList({children}) {
                 {comics.map((item) => {
                     return (
                         <li key={item.id} >
-                            <img className='comics__poster' src={item.image} />
+                            <img className='comics__poster' src={item.image} alt='poster' />
                             <div className="comics__info">
                                 <span className='comics__name' >{item.name == null ? 'Name not found' : item.name}</span>
                                 <span className='comics__date' >{item.date}</span>
