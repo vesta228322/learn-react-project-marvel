@@ -53,7 +53,7 @@ const useMarvelService = () => {
 
     const _transformComics = (comics) => {
         return {
-            name: comics.name,
+            name: comics.name || 'Name not found',
             image: comics.image.original_url,
             date: comics.cover_date,
             id: comics.id
