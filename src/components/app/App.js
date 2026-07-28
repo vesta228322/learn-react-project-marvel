@@ -8,7 +8,8 @@ import CharInfo from "../charInfo/CharInfo";
 import ErrorBaundary from "../errorBaundary/ErrorBaundary";
 
 import decoration from '../../resources/img/vision.png';
-import ComicsList from "../../ComicsList/ComicsList";
+import ComicsList from "../comicsList/ComicsList";
+import AppBanner from "../appBanner/AppBanner";
 
 const App = () => {
 
@@ -17,12 +18,12 @@ const App = () => {
     // useEffect(() => {
     //     getComics().then(data => console.log(data));
     // }, []);
-    
+
     // useEffect(() => {
     //     getSoloInfo().then(res => console.log(res));
     //     getAllInfo().then(res => console.log(res));
     // }, []);
-    
+
 
     const [selectedChar, setChar] = useState(null);
 
@@ -46,6 +47,7 @@ const App = () => {
                     </ErrorBaundary>
                 </div>
                 <img className="bg-decoration" src={decoration} alt="vision" /> */}
+                <AppBanner />
                 <ComicsList />
             </main>
         </div>
