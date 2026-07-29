@@ -1,15 +1,13 @@
-import { useState, useEffect } from "react";
-import useMarvelService from "../../services/MarvelService";
+// import { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
+import { MainPage, ComicsPage, SingleComicPage, Page404 } from '../pages';
+// import useMarvelService from "../../services/MarvelService";
 import AppHeader from "../appHeader/AppHeader";
-import RandomChar from "../randomChar/RandomChar";
-import CharList from "../charList/CharList";
-import CharInfo from "../charInfo/CharInfo";
-import ErrorBaundary from "../errorBaundary/ErrorBaundary";
+import AppBanner from '../appBanner/AppBanner';
 
-import decoration from '../../resources/img/vision.png';
-import ComicsList from "../comicsList/ComicsList";
-import AppBanner from "../appBanner/AppBanner";
+
+
 
 const App = () => {
 
@@ -25,32 +23,26 @@ const App = () => {
     // }, []);
 
 
-    const [selectedChar, setChar] = useState(null);
 
-    const onCharSelected = (id) => {
-        setChar(id);
-    }
 
     return (
-        <div className="app">
-            <AppHeader />
-            <main>
-                {/* <ErrorBaundary>
-                    <RandomChar />
-                </ErrorBaundary>
-                <div className="char__content">
-                    <ErrorBaundary>
-                        <CharList onCharSelected={onCharSelected} />
-                    </ErrorBaundary>
-                    <ErrorBaundary>
-                        <CharInfo charId={selectedChar} />
-                    </ErrorBaundary>
-                </div>
-                <img className="bg-decoration" src={decoration} alt="vision" /> */}
-                <AppBanner />
-                <ComicsList />
-            </main>
-        </div>
+        <Router>
+            <div className="app">
+                <AppHeader />
+                <main>
+                    <Routes>
+                        <Route path='/' element={<MainPage />} />
+                        <Route path='/comics' element={<ComicsPage>
+                            <AppBanner />
+                        </ComicsPage>} />
+                        <Route path='/comics/:comicId' element={<SingleComicPage>
+                            <AppBanner />
+                        </SingleComicPage>} />
+                        <Route path='*' element={<Page404 />} />
+                    </Routes>
+                </main>
+            </div>
+        </Router>
     )
 }
 

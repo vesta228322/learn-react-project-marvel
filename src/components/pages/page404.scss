@@ -1,0 +1,27 @@
+.page404 {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+
+    &__code {
+        font-size: 120px;
+        font-weight: 700;
+        color: #9F0013;
+        line-height: 1;
+    }
+
+    &__title {
+        font-size: 32px;
+        font-weight: 700;
+    }
+
+    &__text {
+        max-width: 500px;
+        color: #666;
+        font-size: 18px;
+    }
+}

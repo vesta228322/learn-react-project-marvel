@@ -8,25 +8,25 @@ import Skeleton from '../skeleton/Skeleton';
 
 import './charInfo.scss';
 
-const CharInfo = ({charId}) => {
+const CharInfo = ({ charId }) => {
 
     const [char, setChar] = useState(null);
 
-    
-    const {loading, error, clearError, getCharacter} = useMarvelService();
+
+    const { loading, error, clearError, getCharacter } = useMarvelService();
 
     useEffect(() => {
         if (!charId) {
             return;
         }
-        
+
         clearError();
         getCharacter(charId)
             .then(onCharLoaded);
-    }, [charId, clearError, getCharacter]);
+    }, [charId]);
 
 
-    const onCharLoaded = (char) => {   
+    const onCharLoaded = (char) => {
         setChar(char);
     }
 

@@ -18,6 +18,9 @@ app.get('/comicvine/*path', async (req, res) => {
 
         const urlToFetch = `${COMICVINE_BASE_URL}${path}`;
 
+        // кончился лимит (случайно) = API = 29b993419bae03316c9dfbdce35be9f07da6bcb4
+        // новый API = dfa786e6dd040a24e7ff0344ba0521c8a8b8a666
+
         const response = await axios.get(urlToFetch, {
             params: {
                 api_key: '29b993419bae03316c9dfbdce35be9f07da6bcb4',
