@@ -2,10 +2,10 @@ import AppBanner from "../appBanner/AppBanner";
 import ComicsList from "../comicsList/ComicsList";
 
 
-function ComicsPage() {
+function ComicsPage({ children }) {
     return (
         <>
-            <AppBanner />
+            {children}
             <ComicsList />
         </>
     )
